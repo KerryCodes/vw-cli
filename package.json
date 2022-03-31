@@ -1,0 +1,31 @@
+{
+  "name": "vw-cli",
+  "version": "1.0.0",
+  "description": "一个用于启动React项目工程化配置的脚手架工具",
+  "main": "./bin/cli.js",
+  "bin": "./bin/cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KerryCodes/vw-cli.git"
+  },
+  "keywords": [
+    "react",
+    "cli",
+    "vite",
+    "webpack"
+  ],
+  "author": "kerry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KerryCodes/vw-cli/issues"
+  },
+  "homepage": "https://github.com/KerryCodes/vw-cli#readme",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "commander": "^9.1.0",
+    "inquirer": "^8.2.2"
+  }
+}
