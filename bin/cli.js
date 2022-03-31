@@ -5,6 +5,7 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const path = require('path');
 const fs = require('fs');
+const fsPromises = require('fs/promises');
 
 
 // commander
@@ -28,20 +29,20 @@ inquirer.prompt([
     default: 'new-react-app' // 默认值
   }
 ]).then(answers => {
-  // 打印互用输入结果
-  console.log(answers)
+  console.log('开始创建项目：' + chalk.yellow(answers.name)) // 打印互用输入结果
+  const templateSrc= path.resolve(__dirname, '../templates') // 模版文件所在目录
   const cwdUrl = process.cwd() // process.cwd() 对应控制台所在目录
+  const dirPath= path.join(cwdUrl, answers.name) // 新建项目目录
+
+  fsPromises.mkdir(dirPath) // 创建新项目目录
   // 从模版目录中读取文件
   fs.readdir('./templates', (err, files) => {
-    if (err) throw err;
-    files.forEach(file => {
-      // 使用 ejs 渲染对应的模版文件
-      // renderFile（模版文件地址，传入渲染数据）
-      // ejs.renderFile(path.join(destUrl, file), answers).then(data => {
-      //   // 生成 ejs 处理后的模版文件
-      // })
-      // fs.readFileSync()
-      fs.writeFileSync(path.join(cwdUrl, file), 'fdff' )
-    })
+    if(err){
+      throw err;
+    }else{
+      files.forEach(file => {
+        fsPromises.copyFile(path.join(templateSrc, file), path.join(dirPath, file))
+      })
+    }
   })
 })
