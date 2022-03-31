@@ -29,20 +29,28 @@ inquirer.prompt([
     default: 'new-react-app' // 默认值
   }
 ]).then(answers => {
-  console.log('开始创建项目：' + chalk.yellow(answers.name)) // 打印互用输入结果
   const templateSrc= path.resolve(__dirname, '../templates') // 模版文件所在目录
   const cwdUrl = process.cwd() // process.cwd() 对应控制台所在目录
   const dirPath= path.join(cwdUrl, answers.name) // 新建项目目录
+  console.log('开始创建项目：' + chalk.yellow(answers.name)) // 打印互用输入结果
+  copyFiles(dirPath, templateSrc)
+})
 
+
+function copyFiles(dirPath, templateSrc){
   fsPromises.mkdir(dirPath) // 创建新项目目录
   // 从模版目录中读取文件
-  fs.readdir('./templates', (err, files) => {
-    if(err){
-      throw err;
-    }else{
-      files.forEach(file => {
-        fsPromises.copyFile(path.join(templateSrc, file), path.join(dirPath, file))
-      })
-    }
+  fs.readdir(templateSrc, (err, files) => {
+    if(err) throw err;
+    files.forEach(file => {
+      const dirPathNext= path.join(dirPath, file)
+      const templateSrcNext= path.join(templateSrc, file)
+      const isDirectory= fs.statSync(templateSrcNext).isDirectory()
+      if(isDirectory){
+        copyFiles(dirPathNext, templateSrcNext)
+        return;
+      }
+      fsPromises.copyFile(templateSrcNext, dirPathNext)
+    })
   })
-})
+}
