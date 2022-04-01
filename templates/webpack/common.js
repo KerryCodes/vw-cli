@@ -11,6 +11,7 @@ module.exports = {
     },
     output: {
         filename: 'js/[name]_[chunkhash:8].js',  // js文件输出路径和文件名
+        chunkFilename: "js/[name]_[chunkhash:8].chunk.js",  // 异步/懒加载等按需加载模块输出路径和文件名
         path: path.resolve(__dirname, '../build'), // 打包文件输出路径
         publicPath: "/", // 该配置能帮助你为项目中的所有资源指定一个基础路径，静态资源最终访问路径 = output.publicPath + 资源loader或插件等配置路径
         clean: true, // 每次build清空旧文件
@@ -78,7 +79,12 @@ module.exports = {
             new TerserPlugin({
                 extractComments: false, //不提取注释到单独文件
             })
-        ]
+        ],
+        splitChunks: { // 用来指定哪类 chunk 需要做拆包优化
+            // chunks: 'all', // 所有chunks， 可以在异步和非异步 chunk 之间共享
+            // minSize: 0,
+            // name: 'vendor',
+        }
     },
     // externals: [ // 不需要打包的模块配置，提供了「从输出的 bundle 中排除依赖」的方法。防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖(external dependencies)
     //   {
