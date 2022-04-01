@@ -29,11 +29,15 @@ inquirer.prompt([
     default: 'new-react-app' // 默认值
   }
 ]).then(answers => {
-  const templateSrc= path.resolve(__dirname, '../templates') // 模版文件所在目录
-  const cwdUrl = process.cwd() // process.cwd() 对应控制台所在目录
-  const dirPath= path.join(cwdUrl, answers.name) // 新建项目目录
-  console.log('开始创建项目：' + chalk.yellow(answers.name)) // 打印互用输入结果
-  copyFiles(dirPath, templateSrc)
+  try{
+    const templateSrc= path.resolve(__dirname, '../templates') // 模版文件所在目录
+    const cwdUrl = process.cwd() // process.cwd() 对应控制台所在目录
+    const dirPath= path.join(cwdUrl, answers.name) // 新建项目目录
+    copyFiles(dirPath, templateSrc)
+    console.log('完成创建项目：' + chalk.yellow(answers.name)) // 打印互用输入结果
+  }catch(e){
+    console.log(e)
+  }
 })
 
 
@@ -51,6 +55,13 @@ function copyFiles(dirPath, templateSrc){
         return;
       }
       fsPromises.copyFile(templateSrcNext, dirPathNext)
+      .then(() => {
+        if(file === 'index.html'){
+          fs.readFile(dirPathNext, 'utf8', (err, data) => {
+            console.log(data);
+          })
+        }
+      })
     })
   })
 }
