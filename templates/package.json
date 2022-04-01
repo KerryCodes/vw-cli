@@ -1,8 +1,8 @@
 {
-  "name": "",
-  "version": "1.0.0",
+  "name": "PROJECT_NAME",
+  "version": "0.0.1",
   "private": "true",
-  "description": "不使用脚手架启动一个新项目所需要的webpack，vite及babel的配置",
+  "description": "DESCRIPTION",
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
@@ -11,20 +11,16 @@
     "build-webpack": "webpack --config webpack/build.js"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KerryCodes/devCon.git"
+    "type": "",
+    "url": ""
   },
-  "keywords": [
-    "webpack",
-    "vite",
-    "babel"
-  ],
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/KerryCodes/devCon/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/KerryCodes/devCon#readme",
+  "homepage": "",
   "dependencies": {
     "react": "^17.0.0",
     "react-dom": "^17.0.0"

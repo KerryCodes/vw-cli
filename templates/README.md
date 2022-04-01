@@ -1,1 +1,2 @@
-# new-app
+# PROJECT_NAME
+DESCRIPTION
