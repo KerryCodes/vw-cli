@@ -1,6 +1,6 @@
 {
   "name": "vw-cli",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "一个用于启动React项目工程化配置的脚手架工具",
   "main": "./bin/cli.js",
   "bin": "./bin/cli.js",
