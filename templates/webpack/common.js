@@ -69,6 +69,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './public/index.html', // 指定打包入口模板文件（相对于项目根目录）
             filename: 'index.html', // 指定输出文件名和位置（相对于输出目录）
+            favicon: path.resolve('./public/favicon.ico'),
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name]_[chunkhash:8].css',
