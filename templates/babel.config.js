@@ -16,4 +16,8 @@ module.exports = {
         ],
         '@babel/preset-typescript', // 将TS语法转换为JS
     ],
+    plugins: [
+      // ["@babel/plugin-proposal-decorators", { "legacy": true }],
+      // ["@babel/plugin-proposal-class-properties", { "loose" : true }],
+    ]
 };

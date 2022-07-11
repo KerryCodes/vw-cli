@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin= require('terser-webpack-plugin');
 const path = require('path');
+const lessModuleRegex = /\.module\.less$/;
 
 
 module.exports = {
@@ -33,6 +34,7 @@ module.exports = {
             },
             {
                 test: /\.(le|c)ss$/,
+                exclude: lessModuleRegex,
                 use: [ // 可以用多个loader串联处理，注意顺序从后往前
                     MiniCssExtractPlugin.loader, 
                     'css-loader',
@@ -45,6 +47,16 @@ module.exports = {
                         }
                     },
                 ],
+            },
+            {
+              test: lessModuleRegex, // 支持styles样式引入
+              use: [
+                MiniCssExtractPlugin.loader,
+                { loader: 'css-loader', options: { modules: { localIdentName: '[local]__[name]--[hash:base64:5]' } } },
+                {
+                  loader: 'less-loader',
+                },
+              ],
             },
             // {
             //     test: /\.svg/,
